@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Al-Rumman Taif | Game QA & IT Specialist</title>
+    <!-- Modern Fonts: Outfit for headings (Esports/Clicky), Inter for readability -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            /* Premium Dark Theme - Deep Violet/Blue */
+            --bg-body: #05050A;
+            --bg-surface: #0F1016;
+            --bg-surface-hover: #181920;
+
+            --primary: #6366f1;
+            /* Indigo */
+            --primary-glow: rgba(99, 102, 241, 0.4);
+
+            --accent: #8b5cf6;
+            /* Violet */
+            --accent-glow: rgba(139, 92, 246, 0.4);
+
+            --highlight: #ec4899;
+            /* Pink/Magenta for subtle details */
+
+            --text-main: #FFFFFF;
+            --text-muted: #94A3B8;
+            --text-dim: #64748B;
+
+            --border: rgba(255, 255, 255, 0.08);
+            --border-hover: rgba(255, 255, 255, 0.15);
+
+            --glass: rgba(20, 20, 30, 0.6);
+            --glass-border: rgba(255, 255, 255, 0.05);
+
+            --radius-sm: 8px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+
+            --gradient-main: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image:
+                radial-gradient(circle at 10% 0%, rgba(99, 102, 241, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 90% 100%, rgba(236, 72, 153, 0.1) 0%, transparent 40%);
+            background-attachment: fixed;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: var(--text-main);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.2s ease;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        section {
+            padding: 6rem 2rem;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        /* Utility Classes */
+        .text-gradient {
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.4rem 0.8rem;
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #818cf8;
+            margin-bottom: 1rem;
+        }
+
+        .pill i {
+            font-size: 0.8rem;
+        }
+
+        /* Navbar */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1.2rem 2rem;
+            background: rgba(5, 5, 10, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: center;
+        }
+
+        .nav-content {
+            width: 100%;
+            max-width: 1280px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .brand span {
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-muted);
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--text-main);
+        }
+
+        .nav-btn {
+            background: white;
+            color: black;
+            padding: 0.6rem 1.2rem;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .nav-btn:hover {
+            background: #e2e8f0;
+            transform: translateY(-1px);
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 90vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 4rem;
+            padding-top: 8rem;
+        }
+
+        .hero-text h1 {
+            font-size: 4.5rem;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-text h1 span {
+            color: var(--text-muted);
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            max-width: 500px;
+        }
+
+        .hero-subtitle span {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            font-family: 'Outfit', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid transparent;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: #4f46e5;
+            box-shadow: 0 6px 25px rgba(99, 102, 241, 0.6);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--border-hover);
+            color: white;
+        }
+
+        .btn-outline:hover {
+            border-color: var(--text-main);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .hero-visual {
+            position: relative;
+            display: flex;
+            justify-content: center;
+        }
+
+        .profile-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            width: 100%;
+            max-width: 450px;
+            position: relative;
+            box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.5);
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ddd6fe, #a78bfa);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            position: relative;
+        }
+
+        .status-badge {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 20px;
+            height: 20px;
+            background: #22c55e;
+            border: 4px solid var(--bg-surface);
+            border-radius: 50%;
+        }
+
+        .profile-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .profile-info p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding: 1.5rem 0;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .profile-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .badge {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            padding: 0.4rem 0.8rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .badge i {
+            color: var(--primary);
+        }
+
+        /* Bento Grid Layout */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: auto auto;
+            gap: 1.5rem;
+            margin-top: 4rem;
+        }
+
+        .bento-card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .bento-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+
+        .card-lg {
+            grid-column: span 2;
+        }
+
+        .card-md {
+            grid-column: span 1;
+        }
+
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(99, 102, 241, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-desc {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        /* Section Headers */
+        .section-header {
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-desc {
+            color: var(--text-muted);
+            max-width: 600px;
+        }
+
+        /* Projects */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-5px);
+        }
+
+        .project-header {
+            padding: 2rem;
+            background: linear-gradient(to bottom, rgba(99, 102, 241, 0.05), transparent);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .project-content {
+            padding: 2rem;
+        }
+
+        .tag-row {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            font-size: 0.75rem;
+            padding: 0.2rem 0.6rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
+            color: var(--text-dim);
+        }
+
+        /* Contact/Footer */
+        .footer {
+            border-top: 1px solid var(--border);
+            padding: 4rem 2rem;
+            margin-top: 8rem;
+            background: var(--bg-surface);
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-5px);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 3rem;
+                padding-top: 6rem;
+            }
+
+            .hero-text {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .cta-group {
+                justify-content: center;
+            }
+
+            .bento-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .card-lg,
+            .card-md {
+                grid-column: span 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-text h1 {
+                font-size: 3rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+        }
+
+        /* Animations */
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Nav -->
+    <nav>
+        <div class="nav-content">
+            <div class="brand">
+                <i class="fas fa-gamepad" style="color: var(--primary);"></i>
+             Al-Rumman<span>.RU</span>
+            </div> 
+            <ul class="nav-links">
+                <li><a href="#about">Profile</a></li>
+                <li><a href="#expertise">Expertise</a></li>
+                <li><a href="#projects">Work</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <a href="#contact" class="nav-btn">Let's Talk</a>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero" id="about">
+        <div class="hero-text">
+            <div class="pill">
+                <i class="fas fa-check-circle"></i> Available for Work
+            </div>
+            <h1>
+                Precision in Play.<br>
+                <span>Excellence in Support.</span>
+            </h1>
+            <p class="hero-subtitle">
+                I am Al-Rumman Taif. <br>
+                <span>Professional Game QA Tester</span> & <span>IT Hardware Specialist</span>.
+                I bridge the gap between development and player experience by finding bugs before they find you.
+            </p>
+            <div class="cta-group">
+                <a href="#projects" class="btn btn-primary">
+                    View Portfolio <i class="fas fa-arrow-right"></i>
+                </a>
+                <a href="#contact" class="btn btn-outline">
+                    Contact Me
+                </a>
+            </div>
+        </div>
+
+        <div class="hero-visual animate-float">
+            <div class="profile-card">
+                <div class="profile-header">
+                    <div class="avatar">
+                        👾
+                        <div class="status-badge"></div>
+                    </div>
+                    <div class="profile-info">
+                        <h3>Al-Rumman Taif</h3>
+                        <p>Bug Hunter & System Optimizer</p>
+                        <div style="margin-top: 0.5rem; display: flex; gap: 0.5rem;">
+                            <span class="tag">Dhaka, Bangladesh</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stat-grid">
+                    <div class="stat-item">
+                        <span class="stat-value">3+</span>
+                        <span class="stat-label">Years XP</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value">600+</span>
+                        <span class="stat-label">Community</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value">100%</span>
+                        <span class="stat-label">Uptime</span>
+                    </div>
+                </div>
+
+                <div class="profile-badges">
+                    <div class="badge"><i class="fab fa-js-square"></i> TypeScript</div>
+                    <div class="badge"><i class="fab fa-discord"></i> Discord.js</div>
+                    <div class="badge"><i class="fas fa-bug"></i> QA Testing</div>
+                    <div class="badge"><i class="fas fa-microchip"></i> Hardware</div>
+                    <div class="badge"><i class="fas fa-network-wired"></i> Networking</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Expertise / Bento Grid -->
+    <section id="expertise">
+        <div class="section-header">
+            <h2 class="section-title">Technical Arsenal</h2>
+            <p class="section-desc">A comprehensive suite of skills tailored for game development ecosystems and
+                hardware infrastructure.</p>
+        </div>
+
+        <div class="bento-grid">
+            <!-- QA Card -->
+            <div class="bento-card card-lg"
+                style="background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), transparent);">
+                <div>
+                    <div class="card-icon"><i class="fas fa-bug"></i></div>
+                    <h3 class="card-title">Game QA & Testing</h3>
+                    <p class="card-desc">Rigorous functional, regression, and performance testing.</p>
+                </div>
+                <div class="tag-row">
+                    <span class="tag">JIRA</span>
+                    <span class="tag">Bug Reporting</span>
+                    <span class="tag">Playtesting</span>
+                    <span class="tag">Performance Analysis</span>
+                </div>
+            </div>
+
+            <!-- Hardware Card -->
+            <div class="bento-card card-md">
+                <div class="card-icon"><i class="fas fa-desktop"></i></div>
+                <h3 class="card-title">PC Hardware</h3>
+                <p class="card-desc">Custom building, overclocking, and thermal optimization for high-end gaming rigs.
+                </p>
+            </div>
+
+            <!-- Community Card -->
+            <div class="bento-card card-md">
+                <div class="card-icon"><i class="fas fa-users"></i></div>
+                <h3 class="card-title">Community Mgmt</h3>
+                <p class="card-desc">Leading 600+ member gaming guilds and managing events.</p>
+            </div>
+
+            <!-- IT Support Card -->
+            <div class="bento-card card-lg">
+                <div>
+                    <div class="card-icon"><i class="fas fa-headset"></i></div>
+                    <h3 class="card-title">IT Support & Networking</h3>
+                    <p class="card-desc">Professional troubleshooting, network setup (CCNA pursuing), and system
+                        administration.</p>
+                </div>
+                <div class="tag-row">
+                    <span class="tag">Windows/Linux</span>
+                    <span class="tag">Network Diag</span>
+                    <span class="tag">Customer Success</span>
+                </div>
+            </div>
+
+            <!-- Dev Card -->
+            <div class="bento-card card-lg">
+                <div>
+                    <div class="card-icon"><i class="fas fa-code"></i></div>
+                    <h3 class="card-title">Bot Development</h3>
+                    <p class="card-desc">Creating custom automation tools and Discord bots to enhance community
+                        engagement.</p>
+                </div>
+                <div class="tag-row">
+                    <span class="tag">TypeScript</span>
+                    <span class="tag">Discord.js</span>
+                    <span class="tag">Automation</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects">
+        <div class="section-header">
+            <h2 class="section-title">Deployed Projects</h2>
+            <p class="section-desc">Real-world applications of my skills in community building and technology.</p>
+        </div>
+
+        <div class="project-grid">
+            <!-- Project 1 -->
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="card-icon" style="background: rgba(88, 101, 242, 0.2); color: #5865F2;"><i
+                            class="fab fa-discord"></i></div>
+                    <h3>Thriving Gaming Community</h3>
+                </div>
+                <div class="project-content">
+                    <p class="card-desc">Built and scaled a Discord community for gamers from scratch. Implemented
+                        custom moderation rules and engagement events.</p>
+                    <div class="tag-row">
+                        <span class="tag">600+ Members</span>
+                        <span class="tag">Community</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 2 -->
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="card-icon" style="background: rgba(255, 204, 0, 0.1); color: #f59e0b;"><i
+                            class="fas fa-robot"></i></div>
+                    <h3>Discord Bot Suite</h3>
+                </div>
+                <div class="project-content">
+                    <p class="card-desc">A collection of TypeScript-based bots for auto-moderation, music playback, and
+                        server utilities.</p>
+                    <div class="tag-row">
+                        <span class="tag">TypeScript</span>
+                        <span class="tag">API Integration</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 3 -->
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="card-icon" style="background: rgba(16, 185, 129, 0.1); color: #10b981;"><i
+                            class="fas fa-wrench"></i></div>
+                    <h3>Custom Rig Builds</h3>
+                </div>
+                <div class="project-content">
+                    <p class="card-desc">Consulted on and assembled multiple high-performance gaming workstations for
+                        clients.</p>
+                    <div class="tag-row">
+                        <span class="tag">Hardware</span>
+                        <span class="tag">Consulting</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Timeline in a Bento/List style -->
+    <section id="experience">
+        <div class="section-header">
+            <h2 class="section-title">Career Log</h2>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 1rem;">
+            <div class="bento-card"
+                style="flex-direction: row; align-items: center; justify-content: start; gap: 2rem;">
+                <div style="min-width: 150px; color: var(--text-muted);">Feb 2025 - Present</div>
+                <div>
+                    <h3 style="margin-bottom: 0.2rem;">Game & QA Tester</h3>
+                    <p style="color: var(--primary);">Thunders Lab</p>
+                    <p class="card-desc" style="margin-bottom: 0;">Ensuring gameplay perfection through rigorous testing
+                        cycles.</p>
+                </div>
+            </div>
+
+            <div class="bento-card"
+                style="flex-direction: row; align-items: center; justify-content: start; gap: 2rem;">
+                <div style="min-width: 150px; color: var(--text-muted);">Ongoing</div>
+                <div>
+                    <h3 style="margin-bottom: 0.2rem;">Volunteer IT Officer</h3>
+                    <p style="color: var(--primary);">BYDC (Bangladesh Youth Development Center)</p>
+                    <p class="card-desc" style="margin-bottom: 0;">Community technical support and network
+                        infrastructure management.</p>
+                </div>
+            </div>
+
+            <div class="bento-card"
+                style="flex-direction: row; align-items: center; justify-content: start; gap: 2rem;">
+                <div style="min-width: 150px; color: var(--text-muted);">3+ Years</div>
+                <div>
+                    <h3 style="margin-bottom: 0.2rem;">Freelance Hardware Tech</h3>
+                    <p style="color: var(--primary);">Self-Employed</p>
+                    <p class="card-desc" style="margin-bottom: 0;">High-end PC building and system troubleshooting.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer / Contact -->
+    <footer id="contact" class="footer">
+        <h2 class="section-title">Ready to Squad Up?</h2>
+        <p class="section-desc" style="margin: 1rem auto;">I'm currently available for freelance projects and full-time
+            roles in QA or IT Support.</p>
+
+        <div class="social-links">
+            <a href="mailto:alrumman.taif@email.com" class="social-link" title="Email"><i
+                    class="fas fa-envelope"></i></a>
+            <a href="https://github.com" class="social-link" title="GitHub"><i class="fab fa-github"></i></a>
+            <a href="#" class="social-link" title="Discord"><i class="fab fa-discord"></i></a>
+            <a href="#" class="social-link" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        </div>
+
+        <p style="color: var(--text-dim); font-size: 0.85rem;">
+            &copy; 2025 Al-Rumman Taif. Designed with <i class="fas fa-heart" style="color: var(--highlight);"></i> for
+            Gamers.
+        </p>
+    </footer>
+
+    <script>
+        // Simple Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Mobile Menu Toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+            if (navLinks.style.display === 'flex') {
+                navLinks.style.flexDirection = 'column';
+                navLinks.style.position = 'absolute';
+                navLinks.style.top = '70px';
+                navLinks.style.left = '0';
+                navLinks.style.width = '100%';
+                navLinks.style.background = 'var(--bg-surface)';
+                navLinks.style.padding = '1rem';
+                navLinks.style.borderBottom = '1px solid var(--border)';
+            }
+        });
+
+        // Add 3D Tilt Effect to Cards
+        document.querySelectorAll('.profile-card, .bento-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+
+                const rotateX = (y - centerY) / 30;
+                const rotateY = (centerX - x) / 30;
+
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)';
+            });
+        });
+    </script>
+</body>
+
+</html>
